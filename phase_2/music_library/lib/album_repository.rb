@@ -21,5 +21,4 @@ class AlbumRepository
 
     return albums
   end
-
 end
