@@ -92,7 +92,7 @@ Define the attributes of your Model class. You can usually map the table columns
 # Model class
 # (in lib/recipes.rb)
 
-class Recipies
+class Recipe
   attr_accessor :id, :name, :cooking_time, :rating
 end
 
