@@ -22,22 +22,22 @@ describe RecipeRepository do
     expect(recipes.first.rating).to eq 4
   end
   
-  xit 'gets single recipe (Bangers and Mash)' do
+  it 'gets single recipe (Bangers and Mash)' do
     repo = RecipeRepository.new
     recipes = repo.find(1)
     
-    expect(recipes.first.name).to eq "Bangers and Mash"
-    expect(recipes.first.cooking_time).to eq 45
-    expect(recipes.first.rating).to eq 4
+    expect(recipes.name).to eq "Bangers and Mash"
+    expect(recipes.cooking_time).to eq 45
+    expect(recipes.rating).to eq 4
   end
   
-  xit 'get single album (Fish and Chips)' do
-    repo = AlbumRepository.new
-    albums = repo.find(2)
+  it 'get single album (Fish and Chips)' do
+    repo = RecipeRepository.new
+    recipes = repo.find(2)
     
-    expect(recipes.first.name).to eq "Fish and Chips"
-    expect(recipes.first.cooking_time).to eq 30
-    expect(recipes.first.rating).to eq 5
+    expect(recipes.name).to eq "Fish and Chips"
+    expect(recipes.cooking_time).to eq 30
+    expect(recipes.rating).to eq 5
   end
   
 end
