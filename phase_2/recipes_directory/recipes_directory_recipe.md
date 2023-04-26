@@ -25,7 +25,7 @@ As a food lover,
 So I can stay organised and decide what to cook,
 I'd like to give a rating to each of the recipes (from 1 to 5).
 
-Table: recipies
+Table: recipes
 
 Columns:
 id | name | cooking_time | rating
@@ -47,13 +47,13 @@ If seed data is provided (or you already created it), you can skip this step.
 -- so we can start with a fresh state.
 -- (RESTART IDENTITY resets the primary key)
 
-TRUNCATE TABLE recipies RESTART IDENTITY; -- replace with your own table name.
+TRUNCATE TABLE recipes RESTART IDENTITY; -- replace with your own table name.
 
 -- Below this line there should only be `INSERT` statements.
 -- Replace these statements with your own seed data.
 
-INSERT INTO recipies (name, cooking_time, rating) VALUES ('Bangers and Mash', '45', '1');
-INSERT INTO recipies (name, cooking_time, rating) VALUES ('Fish and Chips', '30', '1');
+INSERT INTO recipes (name, cooking_time, rating) VALUES ('Bangers and Mash', '45', '1');
+INSERT INTO recipes (name, cooking_time, rating) VALUES ('Fish and Chips', '30', '1');
 ```
 
 Run this SQL file on the database to truncate (empty) the table, and insert the seed data. Be mindful of the fact any existing records in the table will be deleted.
@@ -87,10 +87,10 @@ Define the attributes of your Model class. You can usually map the table columns
 
 ```ruby
 # EXAMPLE
-# Table name: recipies
+# Table name: recipes
 
 # Model class
-# (in lib/recipies.rb)
+# (in lib/recipes.rb)
 
 class Recipies
   attr_accessor :id, :name, :cooking_time, :rating
@@ -116,7 +116,7 @@ Using comments, define the method signatures (arguments and return value) and wh
 
 ```ruby
 # EXAMPLE
-# Table name: recipies
+# Table name: recipes
 
 # Repository class
 # (in lib/recipies_repository.rb)
@@ -127,7 +127,7 @@ class RecipeRepository
   # No arguments
   def all
     # Executes the SQL query:
-    # SELECT id, name, cooking_time, rating FROM recipies;
+    # SELECT id, name, cooking_time, rating FROM recipes;
 
     # Returns an array of Recipe objects.
   end
@@ -136,7 +136,7 @@ class RecipeRepository
   # id argument is an integer
   def find(id) 
     # executes the SQL
-    # SELECT id, name, cooking_time, rating FROM recipies WHERE id =$1;
+    # SELECT id, name, cooking_time, rating FROM recipes WHERE id =$1;
     # returns a single Recipe object
   end
 end
@@ -152,28 +152,28 @@ These examples will later be encoded as RSpec tests.
 # EXAMPLES
 
 # 1
-# Get all recipies
+# Get all recipes
 
 repo = RecipeRepository.new
 
-recipies = repo.all
+recipes = repo.all
 
-recipies.length = 2
-recipies.first.id = "1"
-recipies.first.name = "Bangers and Mash"
-recipies.first.cooking_time = "45"
-recipies.first.rating = "4"
+recipes.length = 2
+recipes.first.id = "1"
+recipes.first.name = "Bangers and Mash"
+recipes.first.cooking_time = "45"
+recipes.first.rating = "4"
 
 # 2
 # get single recipe ('Bangers and Mash')
 
 repo = RecipeRepository.new
 
-recipies = repo.find(1)
+recipes = repo.find(1)
 
-recipies.first.name = "Bangers and Mash"
-recipies.first.cooking_time = "45"
-recipies.first.rating = "4"
+recipes.first.name = "Bangers and Mash"
+recipes.first.cooking_time = "45"
+recipes.first.rating = "4"
 
 
 
@@ -184,9 +184,9 @@ repo = AlbumRepository.new
 
 albums = repo.find(2)
 
-recipies.first.name = "Fish and Chips"
-recipies.first.cooking_time = "30"
-recipies.first.rating = "5"
+recipes.first.name = "Fish and Chips"
+recipes.first.cooking_time = "30"
+recipes.first.rating = "5"
 
 ```
 
@@ -203,15 +203,15 @@ This is so you get a fresh table contents every time you run the test suite.
 
 # file: spec/recipe_repository_spec.rb
 
-def reset_recipies_table
-  seed_sql = File.read('spec/seeds_recipies.sql')
-  connection = PG.connect({ host: '127.0.0.1', dbname: 'recipies_directory_test' })
+def reset_recipes_table
+  seed_sql = File.read('spec/seeds_recipes.sql')
+  connection = PG.connect({ host: '127.0.0.1', dbname: 'recipes_directory_test' })
   connection.exec(seed_sql)
 end
 
 describe RecipeRepository do
   before(:each) do 
-    reset_recipies_table
+    reset_recipes_table
   end
 
   # (your tests will go here).

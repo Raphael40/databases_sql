@@ -30,7 +30,7 @@ Put the different nouns in this table. Replace the example with your own nouns.
 
 Name of the table (always plural): `recipes` 
 
-Column names: `names`, `cooking_time`, `rating`
+Column names: `name`, `cooking_time`, `rating`
 
 ## 3. Decide the column types.
 
@@ -44,7 +44,7 @@ Remember to **always** have the primary key `id` as a first column. Its type wil
 # EXAMPLE:
 
 id: SERIAL
-names: text
+name: text
 cooking_time: time
 rating: int
 ```
@@ -59,9 +59,9 @@ rating: int
 
 CREATE TABLE recipes (
   id SERIAL PRIMARY KEY,
-  names text,
-  cooking_time int,
-  rating
+  name text,
+  cooking_time time,
+  rating int
 );
 ```
 
