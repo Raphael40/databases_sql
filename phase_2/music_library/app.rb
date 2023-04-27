@@ -18,5 +18,15 @@ album_repository = AlbumRepository.new
 #   p album
 # end
 
-artist = artist_repository.find(4)
-puts artist.name
+# artist = artist_repository.find(4)
+# puts artist.name
+
+new_album = Album.new
+new_album.title = 'Trompe le Monde'
+new_album.release_year = '1991'
+new_album.artist_id = '1'
+
+print_album = album_repository.create(new_album)
+p print_album
+
+p album_repository.all
