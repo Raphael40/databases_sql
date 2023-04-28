@@ -1,4 +1,4 @@
-# social_network Model and Repository Classes Design Recipe
+# posts Model and Repository Classes Design Recipe
 
 _Copy this recipe template to design and implement Model and Repository classes for a database table._
 
@@ -16,7 +16,7 @@ Otherwise, [follow this recipe to design and create the SQL schema for your tabl
 Table: students
 
 Columns:
-id | name | cohort_name
+id | title | content | views | user_account_id
 ```
 
 ## 2. Create Test SQL seeds
@@ -27,7 +27,7 @@ If seed data is provided (or you already created it), you can skip this step.
 
 ```sql
 -- EXAMPLE
--- (file: spec/seeds_{table_name}.sql)
+-- (file: spec/seeds_posts.sql)
 
 -- Write your SQL seed here. 
 
@@ -35,13 +35,13 @@ If seed data is provided (or you already created it), you can skip this step.
 -- so we can start with a fresh state.
 -- (RESTART IDENTITY resets the primary key)
 
-TRUNCATE TABLE students RESTART IDENTITY; -- replace with your own table name.
+TRUNCATE TABLE posts RESTART IDENTITY; -- replace with your own table name.
 
 -- Below this line there should only be `INSERT` statements.
 -- Replace these statements with your own seed data.
 
-INSERT INTO students (name, cohort_name) VALUES ('David', 'April 2022');
-INSERT INTO students (name, cohort_name) VALUES ('Anna', 'May 2022');
+INSERT INTO posts (title, content, views, user_account_id) VALUES ('ruby', 'ruby is fun', 5, 1);
+INSERT INTO posts (title, content, views, user_account_id) VALUES ('posgresql', 'pg is confusing at first', 10, 2);
 ```
 
 Run this SQL file on the database to truncate (empty) the table, and insert the seed data. Be mindful of the fact any existing records in the table will be deleted.
