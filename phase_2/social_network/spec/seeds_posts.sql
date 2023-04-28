@@ -13,4 +13,4 @@ TRUNCATE TABLE posts RESTART IDENTITY; -- replace with your own table name.
 -- Replace these statements with your own seed data.
 
 INSERT INTO posts (title, content, views, user_account_id) VALUES ('ruby', 'ruby is fun', 5, 1);
-INSERT INTO posts (title, content, views, user_account_id) VALUES ('posgresql', 'pg is confusing at first', 10, 2);
+INSERT INTO posts (title, content, views, user_account_id) VALUES ('postgresql', 'pg is confusing at first', 10, 2);

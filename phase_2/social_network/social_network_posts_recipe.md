@@ -56,16 +56,16 @@ Usually, the Model class name will be the capitalised table name (single instead
 
 ```ruby
 # EXAMPLE
-# Table name: students
+# Table name: posts
 
 # Model class
-# (in lib/student.rb)
-class Student
+# (in lib/post.rb)
+class Post
 end
 
 # Repository class
-# (in lib/student_repository.rb)
-class StudentRepository
+# (in lib/post_repository.rb)
+class PostRepository
 end
 ```
 
@@ -75,15 +75,15 @@ Define the attributes of your Model class. You can usually map the table columns
 
 ```ruby
 # EXAMPLE
-# Table name: students
+# Table name: posts
 
 # Model class
-# (in lib/student.rb)
+# (in lib/post.rb)
 
-class Student
+class Post
 
   # Replace the attributes by your own columns.
-  attr_accessor :id, :name, :cohort_name
+  attr_accessor :title, :content, :views, :user_account_id
 end
 
 # The keyword attr_accessor is a special Ruby feature
@@ -105,40 +105,40 @@ Using comments, define the method signatures (arguments and return value) and wh
 
 ```ruby
 # EXAMPLE
-# Table name: students
+# Table name: posts
 
 # Repository class
-# (in lib/student_repository.rb)
+# (in lib/post_repository.rb)
 
-class StudentRepository
+class PostRepository
 
   # Selecting all records
   # No arguments
   def all
     # Executes the SQL query:
-    # SELECT id, name, cohort_name FROM students;
+    # SELECT title, content, views, user_account_id FROM posts;
 
-    # Returns an array of Student objects.
+    # Returns an array of post objects.
   end
 
   # Gets a single record by its ID
   # One argument: the id (number)
   def find(id)
     # Executes the SQL query:
-    # SELECT id, name, cohort_name FROM students WHERE id = $1;
+    # SELECT title, content, views, user_account_id FROM posts WHERE id = $1;
 
     # Returns a single Student object.
   end
 
   # Add more methods below for each operation you'd like to implement.
 
-  # def create(student)
+  # def create(post)
   # end
 
-  # def update(student)
+  # def update()
   # end
 
-  # def delete(student)
+  # def delete(id)
   # end
 end
 ```
@@ -155,30 +155,35 @@ These examples will later be encoded as RSpec tests.
 # 1
 # Get all students
 
-repo = StudentRepository.new
+repo = PostRepository.new
 
-students = repo.all
+posts = repo.all
 
-students.length # =>  2
+posts.length # =>  2
 
-students[0].id # =>  1
-students[0].name # =>  'David'
-students[0].cohort_name # =>  'April 2022'
+posts[0].id # =>  1
+posts[0].title # =>  'ruby'
+posts[0].content # =>  'ruby is fun'
+posts[0].views # =>  '5'
+posts[0].user_account_id # =>  '10'
 
-students[1].id # =>  2
-students[1].name # =>  'Anna'
-students[1].cohort_name # =>  'May 2022'
+posts[1].id # =>  2
+posts[1].title # =>  'postresql'
+posts[1].content # =>  'pg is confusing at first'
+posts[1].views # =>  '10'
+posts[1].user_account_id # =>  '2'
 
 # 2
 # Get a single student
 
-repo = StudentRepository.new
+repo = PostRepository.new
 
-student = repo.find(1)
+posts = repo.find(1)
 
-student.id # =>  1
-student.name # =>  'David'
-student.cohort_name # =>  'April 2022'
+posts[0].title # =>  'ruby'
+posts[0].content # =>  'ruby is fun'
+posts[0].views # =>  '5'
+posts[0].user_account_id # =>  '10'
 
 # Add more examples for each method
 ```
