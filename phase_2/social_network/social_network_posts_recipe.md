@@ -185,7 +185,59 @@ posts[0].content # =>  'ruby is fun'
 posts[0].views # =>  '5'
 posts[0].user_account_id # =>  '10'
 
-# Add more examples for each method
+# 3 Creates a new user_account
+
+repo = PostRepository.new
+
+post = Post.new
+post.title = 'databases'
+post.content = 'databases are convenient'
+post.views = 6
+post.user_account_id = 2
+
+
+repo.create(post)
+all_posts = repo.find(3)
+
+added_user_account.email_address # =>'imback456@makers.co.uk'
+added_user_account.username # => 'returning_user'
+repo.all.length # => 3
+
+# 4 Updates an existing post
+
+repo = PostRepository.new
+
+outdated_post = repo.find(1)
+
+post = Post.new
+post.title = 'updated databases'
+post.content = 'updated databases are convenient'
+post.views = 0
+post.user_account_id = 2
+
+outdated_post.update(post)
+
+updated_post = repo.find(1)
+
+updated_post.title = 'updated databases'
+updated_post.content = 'updated databases are convenient'
+updated_post.views = 0
+updated_post.user_account_id = 2
+
+
+# 5 Deletes an existing post
+
+repo = PostRepository.new
+
+post = repo.find(1)
+id_to_delete = 1
+repo.delete(id_to_delete)
+
+all_posts = repo.all
+expect(all_posts).not_to include post
+expect(all_posts).not_to include 'hello123@makers.com'
+expect(all_posts).not_to include 'cool_user'
+# all_albums should not contain the deleted album
 ```
 
 Encode this example as a test.

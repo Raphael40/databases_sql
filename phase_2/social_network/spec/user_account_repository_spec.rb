@@ -73,6 +73,7 @@ describe UserAccountRepository do
     expect(all_user_accounts).not_to include user_account
     expect(all_user_accounts).not_to include 'hello123@makers.com'
     expect(all_user_accounts).not_to include 'cool_user'
+    expect(repo.all.length).to eq 1
     # all_albums should not contain the deleted album
   end
 end

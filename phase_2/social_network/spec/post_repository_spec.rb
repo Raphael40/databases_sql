@@ -30,14 +30,79 @@ describe PostRepository do
     expect(posts[1].user_account_id).to eq 2
   end
 
-  xit 'gets the first post' do
+  it 'gets the first post' do
     repo = PostRepository.new
 
     posts = repo.find(1)
 
-    posts[0].title # =>  'ruby'
-    posts[0].content # =>  'ruby is fun'
-    posts[0].views # =>  '5'
-    posts[0].user_account_id # =>  '10'
+    expect(posts.title).to eq 'ruby'
+    expect(posts.content).to eq 'ruby is fun'
+    expect(posts.views).to eq 5
+    expect(posts.user_account_id).to eq 1
+  end
+
+  it 'gets the second post' do
+    repo = PostRepository.new
+
+    posts = repo.find(2)
+
+    expect(posts.title).to eq 'postgresql'
+    expect(posts.content).to eq 'pg is confusing at first'
+    expect(posts.views).to eq 10
+    expect(posts.user_account_id).to eq 2
+  end
+
+  it 'Creates a new user_account' do
+    repo = PostRepository.new
+
+    post = Post.new
+    post.title = 'databases'
+    post.content = 'databases are convenient'
+    post.views = 6
+    post.user_account_id = 2
+
+
+    repo.create(post)
+    added_post = repo.find(3)
+
+    expect(added_post.title).to eq 'databases'
+    expect(added_post.content).to eq 'databases are convenient'
+    expect(added_post.views).to eq 6
+    expect(added_post.user_account_id).to eq 2
+    expect(repo.all.length).to eq 3
+  end
+
+  it 'Deletes an existing user account' do
+    repo = PostRepository.new
+
+    post = repo.find(1)
+    id_to_delete = 1
+    repo.delete(id_to_delete)
+
+    all_posts = repo.all
+    expect(all_posts).not_to include post
+    expect(all_posts).not_to include 'hello123@makers.com'
+    expect(all_posts).not_to include 'cool_user'
+    expect(repo.all.length).to eq 1
+  end
+
+  it 'Updates an existing post' do
+    repo = PostRepository.new
+
+    outdated_post = repo.find(1)
+
+    outdated_post.title = 'updated databases'
+    outdated_post.content = 'updated databases are convenient'
+    outdated_post.views = 0
+    outdated_post.user_account_id = 2
+
+    repo.update(outdated_post)
+
+    updated_post = repo.find(1)
+
+    expect(updated_post.title).to eq 'updated databases'
+    expect(updated_post.content).to eq 'updated databases are convenient'
+    expect(updated_post.views).to eq 0
+    expect(updated_post.user_account_id).to eq 2
   end
 end
